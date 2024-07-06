@@ -6,7 +6,7 @@
 
   ## Video Demonstration
   
-  [![Watch the video](https://img.youtube.com/vi/your-video-id/0.jpg)](/home/suraj/Deadlock_Occurrence/assets/Deadlock_Demonstration.mkv)
+  [![Watch the video](https://img.youtube.com/vi/your-video-id/0.jpg)](/assets/Deadlock_Demonstration.mkv)
 
   In Database System the deadlock can be implemented as,
   ## 1)Start two different transaction in two different terminal using the query .
