@@ -13,13 +13,14 @@
       ex - select ENGINE_TRANSACTION_ID,LOCK_TYPE,LOCK_MODE,LOCK_STATUS,LOCK_DATA from performance_schema.data_locks;
 
   ## 4)Now Initiate the deadlock cycle as follows,
-    1) In the first terminal allocate the Exclusive lock the on same record and data Item present in your 2nd terminal by firing the below query.
-              ex-  select * from student where rollno='12' for update;
-    2) Once the query the fired , the transaction from 1st terminal goes to WAITING STATE until the transaction from 2nd terminal i.e holding exclusive lock on same data item,
-       doesn't release the lock.
-       Note- here the Input cursor of terminal would continue to blink.
-    3)From the 2nd terminal request an exlcusive lock on same record and data item  i.e hold by transaction of 1st terminal.
-        Note - At this stage Deadlock cycle is formed.
-    4) On requesting Exclusive lock, the system end up with Deadlock sate due to formation of Deadlock cyclce. 
+  ####   From 1st terminal request an Exclusive lock the on same record and data Item i.e hold by transaction in  2nd terminal.
+            ex-  select * from student where rollno='12' for update;
+  ####   Once the query the fired , the transaction from 1st terminal goes to WAITING STATE until the transaction from 2nd terminal i.e holding exclusive lock on same data              item,doesn't release the lock.
+            Note- here the Input cursor of terminal would continue to blink.
+  ####   From the 2nd terminal request an exlcusive lock on same record and data item  i.e hold by transaction of 1st terminal.
+            Note - At this stage Deadlock cycle is formed.
+  ####   On requesting Exclusive lock, the system end up with Deadlock sate due to formation of Deadlock cyclce with Message-
+            ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
+
 
     
