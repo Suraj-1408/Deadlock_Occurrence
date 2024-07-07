@@ -15,13 +15,21 @@
 
   ## 2)Allocating Exclusive Locks on single record of the same entity(table) in each terminal using "for update" keyword in the query
       ex-  select * from student where rollno='12' for update;
-      
+  ![Requesting_Xlock](assets/Transaction1_.png)
+
   ## 3) Making Sure that the Exclusive lock is granted to each individual record of same entity in two different terminal using the below query.
       ex - select ENGINE_TRANSACTION_ID,LOCK_TYPE,LOCK_MODE,LOCK_STATUS,LOCK_DATA from performance_schema.data_locks;
+  ![Requesting_Xlock](assets/T1_X_lock_Status.png)
+
+  ## Transaction T2 Lock Status from 2nd terminal
+  ![Requesting_Xlock](assets/T2_lock_status.png)
+
+  
 
   ## 4)Now Initiate the deadlock cycle as follows,
   ####   From 1st terminal request an Exclusive lock the on same record and data Item i.e hold by transaction in  2nd terminal.
             ex-  select * from student where rollno='12' for update;
+ ![Requesting_Xlock](assets/T2_Requesting_X_lock.png) 
   ####   Once the query the fired , the transaction from 1st terminal goes to WAITING STATE until the transaction from 2nd terminal i.e holding exclusive lock on same data              item,doesn't release the lock.
             Note- here the Input cursor of terminal would continue to blink.
   ####   From the 2nd terminal request an exlcusive lock on same record and data item  i.e hold by transaction of 1st terminal.
