@@ -11,7 +11,7 @@
   In Database System the deadlock can be implemented as,
   ## 1)Start two different transaction in two different terminal using the query .
       ex- start transaction;
-      ![Initiating Transaction](assets/Start_transaction.png)
+  ![Initiating Transaction](assets/Start_transaction.png)
 
   ## 2)Allocating Exclusive Locks on single record of the same entity(table) in each terminal using "for update" keyword in the query
       ex-  select * from student where rollno='12' for update;
