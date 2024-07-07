@@ -15,10 +15,17 @@
 
   ## 2)Allocating Exclusive Locks on single record of the same entity(table) in each terminal using "for update" keyword in the query
       ex-  select * from student where rollno='12' for update;
+      
+  ## Requesting X(Exclusive) lock for Transaction T1 fromm 1st terminal.
   ![Requesting_Xlock](assets/Transaction1_.png)
+
+  ## Requesting X(Exclusive) lock for Transaction T2 fromm 2nd terminal.
+  ![Requesting_Xlock](assets/Transaction2_.png)
+
 
   ## 3) Making Sure that the Exclusive lock is granted to each individual record of same entity in two different terminal using the below query.
       ex - select ENGINE_TRANSACTION_ID,LOCK_TYPE,LOCK_MODE,LOCK_STATUS,LOCK_DATA from performance_schema.data_locks;
+  ## Transaction T1 Lock Status from 1st terminal
   ![Requesting_Xlock](assets/T1_X_lock_Status.png)
 
   ## Transaction T2 Lock Status from 2nd terminal
@@ -27,13 +34,20 @@
   
 
   ## 4)Now Initiate the deadlock cycle as follows,
-  ####   From 1st terminal request an Exclusive lock the on same record and data Item i.e hold by transaction in  2nd terminal.
+  ####   From 2nd terminal request an Exclusive lock the on same record and data Item i.e hold by transaction in T1 of 1st terminal.
             ex-  select * from student where rollno='12' for update;
+ ## From 2nd terminal Requesting X lock for Same record  and data item , i.e held by Transaction T1 of 1st terminal.
  ![Requesting_Xlock](assets/T2_Requesting_X_lock.png) 
   ####   Once the query the fired , the transaction from 1st terminal goes to WAITING STATE until the transaction from 2nd terminal i.e holding exclusive lock on same data              item,doesn't release the lock.
             Note- here the Input cursor of terminal would continue to blink.
-  ####   From the 2nd terminal request an exlcusive lock on same record and data item  i.e hold by transaction of 1st terminal.
+
+  ## Transaction T2 in waiting state.
+  ![Requesting_Xlock](assets/T2_Waiting_for_X_Lock.png) 
+
+  ####   From the 1st terminal request an exlcusive lock on same record and data item  i.e hold by transaction of T2 of 2nd terminal.
             Note - At this stage Deadlock cycle is formed.
+  ## From 1st terminal Requesting X lock for Same record  and data item , i.e held by Transaction T2 of 2nd terminal.
+ ![Requesting_Xlock](assets/T1_Requesting_X_lock.png) 
   ####   On requesting Exclusive lock, the system end up with Deadlock sate due to formation of Deadlock cyclce with Message-
             ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
 
