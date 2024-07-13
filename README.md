@@ -1,6 +1,6 @@
 # Deadlock_Occurrence
   One of the most important concept in CS fundamental is deadlock occurrence that are found in Operating System,Database Management System,Distributed System,Real-time System    or Multithreaded Applications.
-  Deadlock is occurs when set of processes are blocked because each process is holding a resource(CPU or some other resource) and is waiting for another resource that is held    by some different process, due to this none of the processes proceeds further with thier task forming a deadlock cycle and atlast leads the system to deadlock state.
+  Deadlock occurs when set of processes are blocked because each process is holding a resource(CPU or some other resource) and is waiting for another resource that is held    by some different process, due to this none of the processes proceeds further with thier task forming a deadlock cycle and atlast leads the system to deadlock state.
 
 # Deadlock Demonstration using Database System.
 
